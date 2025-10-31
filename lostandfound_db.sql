@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `claimed_items` (
   `id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
+  `claimant_user_id` int(11) DEFAULT NULL,
   `claimant_name` varchar(100) NOT NULL,
   `claimant_contact` varchar(20) NOT NULL,
   `date_claimed` datetime DEFAULT current_timestamp(),

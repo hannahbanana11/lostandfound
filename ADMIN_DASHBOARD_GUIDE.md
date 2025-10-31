@@ -287,17 +287,7 @@ Create an admin account manually in the database or through registration, then c
 
 ---
 
-## 🛠️ Technical Stack
-
-- **Framework**: CodeIgniter 4
-- **Frontend**: Bootstrap 5, Bootstrap Icons
-- **Backend**: PHP 8+
-- **Database**: MySQL
-- **Server**: XAMPP (Apache + MySQL)
-
----
-
-## 📝 Future Enhancements
+##  Future Enhancements
 
 Potential features for future versions:
 - Email notifications for status changes
@@ -332,10 +322,9 @@ Potential features for future versions:
 
 ## 📞 Support
 
-For questions or issues, please contact the development team or refer to CodeIgniter 4 documentation.
+For questions or issues, please contact the development team.
 
 ---
 
-**Version**: 1.0
+**Version**: 1.0  
 **Last Updated**: October 31, 2025
-**Developed with**: CodeIgniter 4, Bootstrap 5, MySQL
