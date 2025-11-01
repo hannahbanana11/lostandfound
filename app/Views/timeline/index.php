@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,26 +13,26 @@
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         .hero-section {
             padding: 3rem 0 2rem 0;
             text-align: center;
             color: white;
         }
-        
+
         .timeline-container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .timeline-card {
             background: white;
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .item-card {
             background: white;
             border-radius: 15px;
@@ -40,12 +41,12 @@
             border: 1px solid #e1e8ed;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .item-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
-        
+
         .item-image {
             width: 100%;
             max-width: 200px;
@@ -54,19 +55,19 @@
             border-radius: 10px;
             margin-bottom: 1rem;
         }
-        
+
         .item-title {
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 0.5rem;
         }
-        
+
         .item-meta {
             color: #7f8c8d;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .contact-info {
             background: #e8f5e8;
             padding: 1rem;
@@ -74,19 +75,19 @@
             margin-top: 1rem;
             border-left: 4px solid #27ae60;
         }
-        
+
         .contact-title {
             font-weight: 600;
             color: #27ae60;
             margin-bottom: 0.5rem;
         }
-        
+
         .empty-state {
             text-align: center;
             padding: 3rem;
             color: #7f8c8d;
         }
-        
+
         .empty-icon {
             font-size: 4rem;
             margin-bottom: 1rem;
@@ -102,24 +103,25 @@
             background: #27ae60;
             color: white;
         }
-        
+
         .nav-link {
             padding: 0.5rem 1rem !important;
             margin: 0 0.25rem;
             border-radius: 5px;
             transition: all 0.3s ease;
         }
-        
+
         .nav-link.active {
-            background-color: rgba(255,255,255,0.2) !important;
+            background-color: rgba(255, 255, 255, 0.2) !important;
             font-weight: 600;
         }
-        
+
         .nav-link:hover {
-            background-color: rgba(255,255,255,0.1) !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(0,0,0,0.1);">
@@ -179,7 +181,7 @@
                     <?php endif; ?>
                 </div>
             </div>
-            
+
             <div class="alert alert-info">
                 <i class="bi bi-info-circle"></i>
                 <?php if (isset($user) && $user): ?>
@@ -191,7 +193,7 @@
                     <strong>System Logic:</strong> These are approved items reported by users. Contact the finder directly if you believe an item is yours. All items shown here have been verified by admin.
                 <?php endif; ?>
             </div>
-            
+
             <?php if (empty($items)): ?>
                 <div class="empty-state">
                     <div class="empty-icon">
@@ -199,9 +201,11 @@
                     </div>
                     <h5>No Items Found</h5>
                     <p>There are currently no approved found items to display.</p>
-                    <a href="/auth/register" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Register to Report Found Items
-                    </a>
+                    <?php if (!isset($user) || !$user): ?>
+                        <a href="/auth/register" class="btn btn-primary">
+                            <i class="bi bi-plus-circle"></i> Register to Report Found Items
+                        </a>
+                    <?php endif; ?>
                 </div>
             <?php else: ?>
                 <div class="row">
@@ -209,15 +213,15 @@
                         <div class="col-lg-6 col-xl-4">
                             <div class="item-card">
                                 <?php if ($item['image']): ?>
-                                    <img src="/uploads/<?= esc($item['image']) ?>" 
-                                         alt="<?= esc($item['item_name']) ?>" 
-                                         class="item-image">
+                                    <img src="/uploads/<?= esc($item['image']) ?>"
+                                        alt="<?= esc($item['item_name']) ?>"
+                                        class="item-image">
                                 <?php else: ?>
                                     <div class="item-image bg-light d-flex align-items-center justify-content-center">
                                         <i class="bi bi-image text-muted" style="font-size: 2rem;"></i>
                                     </div>
                                 <?php endif; ?>
-                                
+
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <h5 class="item-title mb-0">
                                         <i class="bi bi-tag"></i> <?= esc($item['item_name']) ?>
@@ -229,20 +233,20 @@
                                     </h5>
                                     <span class="status-badge">Approved</span>
                                 </div>
-                                
+
                                 <div class="item-meta">
                                     <i class="bi bi-geo-alt"></i> Found at: <strong><?= esc($item['location']) ?></strong>
                                 </div>
-                                
+
                                 <div class="item-meta">
                                     <i class="bi bi-calendar"></i> Reported: <?= date('M j, Y \a\t H:i', strtotime($item['date_reported'])) ?>
                                 </div>
-                                
+
                                 <p class="mt-2 mb-3">
                                     <strong>Description:</strong><br>
                                     <?= esc($item['description']) ?>
                                 </p>
-                                
+
                                 <div class="contact-info">
                                     <div class="contact-title">
                                         <i class="bi bi-person-check"></i> Contact Finder to Claim
@@ -259,7 +263,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    
+
                                     <?php if (isset($user) && $user): ?>
                                         <?php if ($item['user_id'] == $user['id']): ?>
                                             <!-- User cannot claim their own item -->
@@ -279,9 +283,9 @@
                                                         <small>You have claimed this item - pending admin approval</small>
                                                     </div>
                                                     <div class="d-grid">
-                                                        <a href="/timeline/cancel-claim/<?= $item['claim_status']['id'] ?>" 
-                                                           class="btn btn-outline-danger btn-sm"
-                                                           onclick="return confirm('Are you sure you want to cancel your claim?')">
+                                                        <a href="/timeline/cancel-claim/<?= $item['claim_status']['id'] ?>"
+                                                            class="btn btn-outline-danger btn-sm"
+                                                            onclick="return confirm('Are you sure you want to cancel your claim?')">
                                                             <i class="bi bi-x-circle"></i> Cancel Claim
                                                         </a>
                                                     </div>
@@ -326,7 +330,7 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
-                
+
                 <div class="mt-4 text-center">
                     <div class="alert alert-success">
                         <i class="bi bi-check-circle"></i>
@@ -335,7 +339,7 @@
                 </div>
             <?php endif; ?>
         </div>
-        
+
         <div class="text-center mt-3">
             <?php if (isset($user) && $user): ?>
                 <!-- User is logged in -->
@@ -361,7 +365,8 @@
             <?php endif; ?>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
